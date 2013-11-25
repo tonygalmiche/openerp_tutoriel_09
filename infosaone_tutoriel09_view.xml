@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+
+        <!-- Vue Formulaire -->
+        <record model="ir.ui.view" id="infosaone_tutoriel09_form_view">
+            <field name="name">infosaone_tutoriel09_form_view</field>
+
+            <!-- Cette vue 'form' est basée sur le modèle créé dans le tutoriel précédent -->
+            <field name="model">infosaone.tutoriel08</field>
+            <field name="arch" type="xml">     
+                <form string="Formulaire" version="7.0">  
+
+                    <!-- Par défaut, un formulaire est sur 4 colonnes. 4 colonnes permettent d'afficher 2 champs + 2 labels
+                         colspan="4" : Permet de fusionner les 4 colonnes en 1 colonne
+                         col="1"     : Indique qu'il ne faut conserver qu'une seule colonne (donc pas de colonne pour le label)
+                    -->
+                    <group col="1" colspan="4">
+                        <field name="image" widget='image' class="oe_avatar oe_left" options='{"preview_image": "image_medium"}'/>
+                    </group>
+
+                    <!-- Mise en forme HTML pour mettre en evidence le champ 'name' -->
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Nom" />
+                        </h1>
+                    </div>
+
+                    <!-- Texte de séparation -->
+                    <separator string="Champs sur deux colonnes" colspan="4"/>
+
+                    <!-- Champs sur 4 colonnes soit 2 champs avec leurs labels -->
+                    <group col="4" colspan="4">
+                      <field name="taille" />
+                      <field name="age"    />
+
+                      <field name="extra01"/>
+
+                      <!-- Relation many2many : Sour forme de tableau et non pas de tag -->
+                      <field name="lafamille" placeholder="..." string="Famille"/>
+
+                    </group>
+
+                    <!-- Texte de séparation -->
+                    <separator string="Onglets" colspan="4"/>
+
+                    <!-- Creation de 2 onglets pour placer les autres champs -->
+                    <notebook colspan="4">
+
+                      <!-- Onglet 1 -->
+                      <page string="Onglet 1">
+                        <group col="4" colspan="4">
+                          <field name="extra02"/>
+                          <field name="extra03"/>
+                          <field name="extra04"/>
+                          <field name="extra05"/>
+                        </group>
+                      </page>
+
+                      <!-- Onglet 2 -->
+                      <page string="Onglet 2">
+                        <group col="2" colspan="4">
+                          <field name="extra06"/>
+                          <field name="extra07"/>
+                          <field name="extra08"/>
+                        </group>
+                      </page>
+                    </notebook>
+
+                </form>
+                </field>
+        </record>
+
+
+
+
+
+        <!-- Action appellée par le menu  -->
+        <record model="ir.actions.act_window" id="infosaone_tutoriel09_action">
+            <field name="name">infosaone_tutoriel09_action</field>
+            <field name="res_model">infosaone.tutoriel08</field>
+            
+            <!-- Permet de preciser la vue a utiliser pour cette action 
+                 sinon, la vue par défaut sera utilisée -->
+            <field name="view_id" ref="infosaone_tutoriel09_form_view"/>      
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+
+        <!-- Menus et sous-menus -->
+        <menuitem id="sousmenu_infosaone_tutoriel09"        sequence="10"  name="Tutoriel 09" parent="openerp_tutoriel_07.menu_infosaone_tutoriel"/>
+            <menuitem id="menu_infosaone_tutoriel09_form"   sequence="10"  name="Tutoriel 09" parent="sousmenu_infosaone_tutoriel09" action="infosaone_tutoriel09_action" />
+
+
+      
+    </data>
+</openerp>
